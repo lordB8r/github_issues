@@ -1,0 +1,27 @@
+<section >
+  <h1>Github Issues</h1>
+  <br>
+  <div>
+    The table below is a list of github issues, capped at 30 due to pagination
+    <br>
+    Click any title to go to the issue
+  </div>
+  <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+        </tr>
+        <%= for issue <- @issues do %>
+            <tr>
+                <td><%= issue.number %></td>
+                <td><a href={issue.html_url}>
+                    <%= issue.title %>
+                </a>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+
+
+</section>

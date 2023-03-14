@@ -2,22 +2,26 @@ defmodule GhIssueViewerWeb.Router do
   use GhIssueViewerWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {GhIssueViewerWeb.LayoutView, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, {GhIssueViewerWeb.LayoutView, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", GhIssueViewerWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    get "/", PageController, :index
+    get("/", PageController, :index)
+
+    post("/search", GithubController, :search)
+
+    # live("/live_search", GithubController, :live_search)
   end
 
   # Other scopes may use custom stacks.
@@ -36,9 +40,9 @@ defmodule GhIssueViewerWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: GhIssueViewerWeb.Telemetry
+      live_dashboard("/dashboard", metrics: GhIssueViewerWeb.Telemetry)
     end
   end
 
@@ -48,9 +52,9 @@ defmodule GhIssueViewerWeb.Router do
   # node running the Phoenix server.
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 end

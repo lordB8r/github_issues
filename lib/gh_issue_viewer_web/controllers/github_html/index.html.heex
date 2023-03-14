@@ -1,0 +1,8 @@
+<section class="phx-hero">
+  <%= form_for @conn.params, Routes.search_path(@conn, :search), fn f -> %>
+    <%= text_input f, :org_name %>
+    <%= text_input f, :repo_name %>
+    <%= submit "Search" %>
+  <% end %>
+
+</section>

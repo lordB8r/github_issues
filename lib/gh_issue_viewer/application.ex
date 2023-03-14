@@ -9,7 +9,7 @@ defmodule GhIssueViewer.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      # GhIssueViewer.Repo,
+      # GhIssueViewer.Repo, # don't need a DB, so commented this out
       # Start the Telemetry supervisor
       GhIssueViewerWeb.Telemetry,
       # Start the PubSub system

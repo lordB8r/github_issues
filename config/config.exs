@@ -17,6 +17,10 @@ config :gh_issue_viewer, GhIssueViewerWeb.Endpoint,
   pubsub_server: GhIssueViewer.PubSub,
   live_view: [signing_salt: "dJ29W1z+"]
 
+config :gh_issue_viewer, GhIssueViewer.API.Github,
+  base_url: "https://api.github.com/repos/",
+  issues_path: "/issues"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
